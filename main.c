@@ -4,7 +4,7 @@
 
 int main(){
     srand(time(0));
-    int random_number = rand()%100 + 1;
+    int random_number = rand()%101;
     int user_guess, tries = 0;
     printf("Guess a random number between 0 and 100.\n");
     do{
@@ -12,20 +12,22 @@ int main(){
         printf("Enter a random guess.>>> ");
         scanf("%d", &user_guess);
         if (user_guess!=random_number){
-            if(user_guess>random_number && user_guess-random_number < 10){
-                printf("Incorrect guess. But you are so close to it. TRY ANOTHER SMALLER NUMBER!\n");
+            if(abs(user_guess-random_number) < 10){
+                if(user_guess>random_number){
+                    printf("Incorrect guess. But you are so close to it. TRY ANOTHER SMALLER NUMBER!\n");
+                }
+                else if(user_guess<random_number){
+                    printf("Incorrect guess. But you are so close to it. TRY ANOTHER LARGER NUMBER!\n");
+                }
             }
-            if(user_guess<random_number && random_number-user_guess < 10){
-                printf("Incorrect guess. But you are so close to it. TRY ANOTHER LARGER NUMBER!\n");
-            }
-            else if(user_guess>random_number && !(user_guess-random_number < 10)){
+            else if(user_guess>random_number){
                 printf("Incorrect guess. Maybe try guessing a SMALLER number?\n");
             }
-            else if(user_guess<random_number && !(random_number-user_guess < 10)){
+            else if(user_guess<random_number){
                 printf("Incorrect guess. Maybe try guessing a LARGER number?\n");
             }
         }
-        else if(user_guess==random_number){
+        else{
             if (tries==1){
             printf("Congratulations, your guess is correct. The number was indeed %d. It took you %d try.", random_number, tries);
             }
